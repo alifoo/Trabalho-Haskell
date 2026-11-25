@@ -1,0 +1,5 @@
+build/
+campeonato
+testes
+*.hi
+*.o

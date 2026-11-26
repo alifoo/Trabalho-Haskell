@@ -16,7 +16,29 @@ tests/Testes.hs       testes com resultado esperado
 docs/decisoes.md      decisões de modelagem e limitações
 ```
 
+## Instalação
+
+O projeto precisa do GHC, o compilador de Haskell. O jeito oficial de instalar é pelo [GHCup](https://www.haskell.org/ghcup/).
+
+No Windows, abra o PowerShell (não precisa ser como administrador), cole o comando abaixo e aceite as opções padrão. A instalação baixa bastante coisa e pode demorar.
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force;[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; try { & ([ScriptBlock]::Create((Invoke-WebRequest https://www.haskell.org/ghcup/sh/bootstrap-haskell.ps1 -UseBasicParsing))) -Interactive -DisableCurl } catch { Write-Error $_ }
+```
+
+No macOS e no Linux, rode no terminal:
+
+```sh
+curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+```
+
+No macOS também dá para usar o Homebrew: `brew install ghc`.
+
+Depois de instalar, feche o terminal, abra de novo e confira com `ghc --version`. Se ele disser que `ghc` ou `runghc` não é reconhecido, o terminal não foi reaberto ou a instalação não terminou.
+
 ## Como executar
+
+Os comandos abaixo rodam dentro da pasta do projeto (a que tem `src/` e `tests/`).
 
 Rodar direto, sem compilar:
 
@@ -24,6 +46,8 @@ Rodar direto, sem compilar:
 runghc -isrc src/Main.hs
 runghc -isrc tests/Testes.hs
 ```
+
+O `-isrc` diz ao GHC para procurar os módulos (`Tipos`, `Leitura`...) na pasta `src`.
 
 Compilar com todos os avisos ligados:
 
@@ -34,7 +58,7 @@ ghc -Wall -isrc -outputdir build/testes -o testes     tests/Testes.hs
 ./testes
 ```
 
-`-isrc` diz ao GHC para procurar os módulos (`Tipos`, `Leitura`...) na pasta `src`.
+No Windows, os programas compilados são `campeonato.exe` e `testes.exe`, e no PowerShell eles rodam com `.\campeonato` e `.\testes`.
 
 ## O que o programa mostra
 
